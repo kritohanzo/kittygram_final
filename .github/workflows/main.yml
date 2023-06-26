@@ -28,7 +28,7 @@ jobs:
     # Устанавливаем Python с помощью action
     - name: Set up Python
       uses: actions/setup-python@v4
-    # В action setup-python@v4 передаём параметр — версию Python
+    # В action setup-python@v4 передаём параметр — версию Python.
       with:
         python-version: 3.9
     # Обновляем pip, устанавливаем flake8 и flake8-isort, 
@@ -196,8 +196,8 @@ jobs:
           # Перезапускает все контейнеры в Docker Compose
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
-          sudo docker image prune -a -f
-          sudo docker system prune -a -f
+          sudo docker image prune -f
+          sudo docker system prune -f
           # Выполняет миграции и сбор статики
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
