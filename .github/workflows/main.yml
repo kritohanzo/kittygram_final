@@ -23,7 +23,7 @@ jobs:
     - name: Test with flake8
       run: |
         python -m flake8 backend/
-  backend_pytest:
+  backend_django_test:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -59,7 +59,9 @@ jobs:
   build_backend_and_push_to_docker_hub:
     name: push backend image to DockerHub
     runs-on: ubuntu-latest
-    needs: tests
+    needs:
+      - backend_linter_test
+      - backend_django_test
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
