@@ -3,4 +3,4 @@ WORKDIR /app
 COPY requirements/requirements.project.txt .
 RUN pip install -r requirements.project.txt --no-cache-dir
 COPY . .
-ENTRYPOINT ["migrate_collect_static_gunicorn.sh"]
+ENTRYPOINT ["./migrate_collect_static_gunicorn.sh"]
