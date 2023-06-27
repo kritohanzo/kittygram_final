@@ -12,11 +12,12 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: kritohanzo/kittygram_backend
+    image: kritohanzo/kittygram_backend:latest-${{ github.sha }}
     env_file: .env
     depends_on:
       - db
     command:
+      - cd /app
       - python manage.py migrate
       - python manage.py collectstatic
       - cp -r /app/collected_static/. /backend_static/static/
@@ -24,13 +25,13 @@ services:
       - static:/backend_static
       - media:/app/media
   frontend:
-    image: kritohanzo/kittygram_frontend
+    image: kritohanzo/kittygram_frontend:latest-${{ github.sha }}
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
-    image: kritohanzo/kittygram_gateway
+    image: kritohanzo/kittygram_gateway:latest-${{ github.sha }}
     ports:
       - 9000:80
     volumes:
